@@ -1,0 +1,15 @@
+{
+  "name": "clarion",
+  "owner": {
+    "name": "Rustamjon Nuriddinov",
+    "url": "https://github.com/rustammdev"
+  },
+  "description": "Clarion — Uzbek speech-to-text for AI agents",
+  "plugins": [
+    {
+      "name": "clarion",
+      "source": "./",
+      "description": "Transcribe Uzbek audio and video into text and SRT/VTT subtitles."
+    }
+  ]
+}

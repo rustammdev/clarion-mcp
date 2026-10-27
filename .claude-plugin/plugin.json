@@ -1,0 +1,30 @@
+{
+  "name": "clarion",
+  "displayName": "Clarion",
+  "version": "0.1.0",
+  "description": "Clarion — transcribe Uzbek audio and video into text and SRT/VTT subtitles, powered by the UzASR API.",
+  "author": {
+    "name": "Rustamjon Nuriddinov",
+    "url": "https://github.com/rustammdev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "uzbek",
+    "speech-to-text",
+    "asr",
+    "transcription",
+    "subtitles",
+    "srt"
+  ],
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "UzASR API key",
+      "description": "Key starting with uzasr_live_. Create a separate key for this plugin so it can be revoked on its own.",
+      "sensitive": true,
+      "required": true
+    }
+  },
+  "homepage": "https://github.com/rustammdev/clarion",
+  "repository": "https://github.com/rustammdev/clarion"
+}

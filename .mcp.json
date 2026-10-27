@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "clarion": {
+      "type": "http",
+      "url": "https://api.uzasr.uz/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_key}"
+      }
+    }
+  }
+}
