@@ -22,7 +22,7 @@ In Claude Code:
 /plugin install clarion-mcp@clarion-mcp
 ```
 
-On first use, run `/mcp`, pick **clarion** and choose **Authenticate**. A
+On first use, run `/mcp`, pick the **clarion** server and choose **Authenticate**. A
 browser opens: sign in to clarion.uz and click **Allow**. Claude Code stores
 the token in the OS keychain and refreshes it on its own. Connected apps
 are listed in the Clarion console, where you can disconnect them any time.
@@ -30,7 +30,7 @@ are listed in the Clarion console, where you can disconnect them any time.
 For CI or headless use, add the server with an API key instead:
 
 ```
-claude mcp add --transport http clarion https://api.uzasr.uz/mcp \
+claude mcp add --transport http clarion-mcp https://api.uzasr.uz/mcp \
   --header "Authorization: Bearer $UZASR_API_KEY"
 ```
 

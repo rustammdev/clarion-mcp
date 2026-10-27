@@ -53,7 +53,7 @@ with `get_transcription`.
 | `model_unavailable`, `model_overloaded` | The GPU is starting or busy: wait about 10 s and retry |
 | `audio_unreadable` | Convert with ffmpeg and upload again |
 | `download_not_found` | The link was used or expired: call `get_transcription` with `save_to` again |
-| `invalid_token`, `invalid_api_key` | Ask the user to run `/mcp`, pick clarion and choose Authenticate |
+| `invalid_token`, `invalid_api_key` | Ask the user to run `/mcp`, pick the clarion server and choose Authenticate |
 
 ## Rules
 
