@@ -14,8 +14,8 @@ curl commands that the tools return.
 ## Steps for each file
 
 1. **Check the file.** Get its size (`wc -c < file`). The upload limit is
-   25 MB. For video, or for audio over the limit, extract compressed mono
-   audio first and upload that instead:
+   256 MB. For video, or for audio over 25 MB, extract compressed mono
+   audio first and upload that instead, so the upload is fast:
    `ffmpeg -i input.mp4 -vn -ac 1 -ar 16000 -c:a libopus -b:a 32k input.ogg`
    (about 0.25 MB per minute; audio up to 3 hours is accepted).
 2. **Upload.** Call `create_upload` with the file path, then run the

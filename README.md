@@ -57,7 +57,7 @@ Or call it directly: `/clarion-mcp:transcribe lesson.mp4 srt`.
 
 ## Limits
 
-- Files up to 25 MB, audio up to 3 hours.
+- Files up to 256 MB, audio up to 3 hours.
 - Up to 10 uploads per account may wait for transcription at a time.
 - Upload and download links work once and expire after 15 minutes.
 - Only Uzbek speech is supported.
