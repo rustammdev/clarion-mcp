@@ -2,7 +2,7 @@
 name: transcribe
 description: Transcribe Uzbek speech from local audio or video files into text, timestamped segments, or SRT/VTT subtitles using the Clarion MCP tools. Use when the user asks to transcribe, caption or subtitle Uzbek audio/video, or to turn a recording into text (o'zbekcha transkript, matnga o'girish, subtitr, расшифровка узбекской речи).
 argument-hint: "<file or folder> [text|segments|srt|vtt]"
-allowed-tools: mcp__plugin_clarion_clarion__list_models, mcp__plugin_clarion_clarion__create_upload, mcp__plugin_clarion_clarion__transcribe, mcp__plugin_clarion_clarion__get_transcription
+allowed-tools: mcp__plugin_clarion-mcp_clarion__list_models, mcp__plugin_clarion-mcp_clarion__create_upload, mcp__plugin_clarion-mcp_clarion__transcribe, mcp__plugin_clarion-mcp_clarion__get_transcription
 ---
 
 # Uzbek transcription with Clarion
@@ -53,7 +53,7 @@ with `get_transcription`.
 | `model_unavailable`, `model_overloaded` | The GPU is starting or busy: wait about 10 s and retry |
 | `audio_unreadable` | Convert with ffmpeg and upload again |
 | `download_not_found` | The link was used or expired: call `get_transcription` with `save_to` again |
-| `invalid_api_key` | Ask the user to set the key with `/plugin configure clarion@clarion` |
+| `invalid_api_key` | Ask the user to set the key with `/plugin configure clarion-mcp@clarion-mcp` |
 
 ## Rules
 

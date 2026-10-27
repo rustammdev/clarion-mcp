@@ -1,8 +1,8 @@
 {
-  "name": "clarion",
-  "displayName": "Clarion",
+  "name": "clarion-mcp",
+  "displayName": "Clarion MCP",
   "version": "0.1.0",
-  "description": "Clarion — transcribe Uzbek audio and video into text and SRT/VTT subtitles, powered by the UzASR API.",
+  "description": "Clarion MCP — transcribe Uzbek audio and video into text and SRT/VTT subtitles, powered by the UzASR API.",
   "author": {
     "name": "Rustamjon Nuriddinov",
     "url": "https://github.com/rustammdev"
@@ -25,6 +25,6 @@
       "required": true
     }
   },
-  "homepage": "https://github.com/rustammdev/clarion",
-  "repository": "https://github.com/rustammdev/clarion"
+  "homepage": "https://github.com/rustammdev/clarion-mcp",
+  "repository": "https://github.com/rustammdev/clarion-mcp"
 }

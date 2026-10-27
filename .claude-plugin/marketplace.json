@@ -1,13 +1,13 @@
 {
-  "name": "clarion",
+  "name": "clarion-mcp",
   "owner": {
     "name": "Rustamjon Nuriddinov",
     "url": "https://github.com/rustammdev"
   },
-  "description": "Clarion — Uzbek speech-to-text for AI agents",
+  "description": "Clarion MCP — Uzbek speech-to-text for AI agents",
   "plugins": [
     {
-      "name": "clarion",
+      "name": "clarion-mcp",
       "source": "./",
       "description": "Transcribe Uzbek audio and video into text and SRT/VTT subtitles."
     }

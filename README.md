@@ -1,67 +1,76 @@
-# Clarion
+# Clarion MCP
 
-O'zbekcha nutqni matnga aylantiruvchi Claude Code plugini. Audio yoki
-videoni matnga, vaqtli segmentlarga yoki SRT/VTT subtitrga o'giradi.
-Ichida [UzASR](https://api.uzasr.uz) API ishlaydi: o'zbek tiliga
-moslab o'qitilgan GigaAM modeli va KenLM.
+A Claude Code plugin that turns Uzbek speech into text. It transcribes
+audio and video into plain text, timestamped segments, or SRT/VTT
+subtitles. It runs on the [UzASR](https://api.uzasr.uz) API: a GigaAM
+model fine-tuned for Uzbek, decoded with a KenLM language model.
 
-Plugin ikki qismdan iborat:
+The plugin has two parts:
 
-- **MCP server** `https://api.uzasr.uz/mcp`. API kalit o'rnatishda bir
-  marta so'raladi va OS keychain'ida saqlanadi.
-- **`/clarion:transcribe` skill'i.** Fayl hajmini tekshiradi, kerak
-  bo'lsa ffmpeg bilan siqadi, yuklaydi, transkript qiladi va natijani
-  faylga yozadi.
+- **MCP server** at `https://api.uzasr.uz/mcp`. Your API key is asked for
+  once at install time and kept in the OS keychain.
+- **`/clarion-mcp:transcribe` skill.** It checks the file size,
+  compresses the file with ffmpeg when needed, uploads it, transcribes it,
+  and writes the result to a file.
 
-## O'rnatish
+## Installation
 
-Claude Code ichida:
+In Claude Code:
 
 ```
-/plugin marketplace add rustammdev/clarion
-/plugin install clarion@clarion
+/plugin marketplace add rustammdev/clarion-mcp
+/plugin install clarion-mcp@clarion-mcp
 ```
 
-O'rnatishda UzASR API kaliti (`uzasr_live_…`) so'raladi. Kalitni keyin
-almashtirish: `/plugin configure clarion@clarion`. Plugin uchun alohida
-kalit oching, shunda uni boshqa integratsiyalarga tegmasdan bekor qilish
-mumkin bo'ladi.
+You will be asked for a UzASR API key (`uzasr_live_…`). To change it
+later, run `/plugin configure clarion-mcp@clarion-mcp`. Create a separate
+key for this plugin, so you can revoke it without affecting your other
+integrations.
 
-## Ishlatish
+## Usage
 
-Oddiy so'z bilan aytish kifoya, skill o'zi ishga tushadi:
+Just ask in plain words and the skill starts on its own:
 
-- "dars.mp4 ni o'zbekcha subtitrga aylantirib dars.srt ga yoz"
-- "intervyu.mp3 ni matnga o'gir va asosiy fikrlarni qisqacha yoz"
-- "podcasts/ papkasidagi hamma mp3 larni transkript qil"
+- "Turn lesson.mp4 into Uzbek subtitles and save them to lesson.srt"
+- "Transcribe interview.mp3 and summarise the key points"
+- "Transcribe every mp3 in the podcasts/ folder"
 
-Yoki to'g'ridan-to'g'ri: `/clarion:transcribe lesson.mp4 srt`.
+Or call it directly: `/clarion-mcp:transcribe lesson.mp4 srt`.
 
-Formatlar: `text`, `segments` (vaqtli qatorlar), `srt`, `vtt`. Modellar:
-`uzasr-large` (asosiy, eng aniq) va `uzasr-base` (tezroq, arzonroq).
+| Formats | Description |
+|---|---|
+| `text` | plain transcript |
+| `segments` | timestamped lines |
+| `srt`, `vtt` | subtitles, with cues built from word timings |
 
-## Cheklovlar
+| Models | Description |
+|---|---|
+| `uzasr-large` | default, most accurate |
+| `uzasr-base` | faster and cheaper |
 
-Fayl 25 MB gacha, audio 3 soatgacha. Kalitda transcribe kutayotgan
-upload'lar 10 tagacha. Yuklash va yuklab olish havolalari bir martalik va
-15 daqiqa amal qiladi. Faqat o'zbek tili.
+## Limits
 
-## Xavfsizlik va maxfiylik
+- Files up to 25 MB, audio up to 3 hours.
+- Up to 10 uploads per key may wait for transcription at a time.
+- Upload and download links work once and expire after 15 minutes.
+- Only Uzbek speech is supported.
 
-- Skill ruxsatsiz faqat Clarion MCP tool'larini chaqira oladi. `curl` va
-  `ffmpeg` odatdagidek ruxsat so'raydi.
-- Audio serverda faqat ishlash uchun turadi va ishlangach o'chiriladi.
-  Transkript 7 kundan keyin tozalanadi.
-- `save_to` bilan natija to'g'ridan-to'g'ri faylga tushadi va agent
-  kontekstiga kirmaydi.
+## Security and privacy
 
-## Ishlab chiqish
+- Without asking, the skill may call only the Clarion MCP tools. `curl`
+  and `ffmpeg` go through Claude Code's normal permission prompts.
+- Audio stays on the server only while it is being processed and is then
+  deleted. Transcripts are deleted after 7 days.
+- With `save_to`, the transcript goes straight into a file and never
+  enters the agent's context.
+
+## Development
 
 ```
 claude plugin validate . --strict
 claude --plugin-dir .
 ```
 
-## Litsenziya
+## License
 
 [MIT](LICENSE)
