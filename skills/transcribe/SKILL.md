@@ -39,7 +39,7 @@ curl commands that the tools return.
 
 ## Several files
 
-At most 10 uploads per key may wait for `transcribe`. Work in batches of
+At most 10 uploads per account may wait for `transcribe`. Work in batches of
 up to 10: upload a file, start `transcribe`, move on, and collect results
 with `get_transcription`.
 
@@ -53,7 +53,7 @@ with `get_transcription`.
 | `model_unavailable`, `model_overloaded` | The GPU is starting or busy: wait about 10 s and retry |
 | `audio_unreadable` | Convert with ffmpeg and upload again |
 | `download_not_found` | The link was used or expired: call `get_transcription` with `save_to` again |
-| `invalid_api_key` | Ask the user to set the key with `/plugin configure clarion-mcp@clarion-mcp` |
+| `invalid_token`, `invalid_api_key` | Ask the user to run `/mcp`, pick clarion and choose Authenticate |
 
 ## Rules
 

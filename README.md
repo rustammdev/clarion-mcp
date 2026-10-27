@@ -7,8 +7,8 @@ model fine-tuned for Uzbek, decoded with a KenLM language model.
 
 The plugin has two parts:
 
-- **MCP server** at `https://api.uzasr.uz/mcp`. Your API key is asked for
-  once at install time and kept in the OS keychain.
+- **MCP server** at `https://api.uzasr.uz/mcp`. No API key to copy: you
+  sign in to Clarion in the browser once, and Claude Code keeps the token.
 - **`/clarion-mcp:transcribe` skill.** It checks the file size,
   compresses the file with ffmpeg when needed, uploads it, transcribes it,
   and writes the result to a file.
@@ -22,10 +22,17 @@ In Claude Code:
 /plugin install clarion-mcp@clarion-mcp
 ```
 
-You will be asked for a UzASR API key (`uzasr_live_…`). To change it
-later, run `/plugin configure clarion-mcp@clarion-mcp`. Create a separate
-key for this plugin, so you can revoke it without affecting your other
-integrations.
+On first use, run `/mcp`, pick **clarion** and choose **Authenticate**. A
+browser opens: sign in to clarion.uz and click **Allow**. Claude Code stores
+the token in the OS keychain and refreshes it on its own. Connected apps
+are listed in the Clarion console, where you can disconnect them any time.
+
+For CI or headless use, add the server with an API key instead:
+
+```
+claude mcp add --transport http clarion https://api.uzasr.uz/mcp \
+  --header "Authorization: Bearer $UZASR_API_KEY"
+```
 
 ## Usage
 
@@ -51,12 +58,14 @@ Or call it directly: `/clarion-mcp:transcribe lesson.mp4 srt`.
 ## Limits
 
 - Files up to 25 MB, audio up to 3 hours.
-- Up to 10 uploads per key may wait for transcription at a time.
+- Up to 10 uploads per account may wait for transcription at a time.
 - Upload and download links work once and expire after 15 minutes.
 - Only Uzbek speech is supported.
 
 ## Security and privacy
 
+- Sign-in uses OAuth 2.1 with PKCE. Access tokens live for an hour and
+  refresh tokens rotate on every use; no long-lived key sits on disk.
 - Without asking, the skill may call only the Clarion MCP tools. `curl`
   and `ffmpeg` go through Claude Code's normal permission prompts.
 - Audio stays on the server only while it is being processed and is then
